@@ -26,7 +26,7 @@ sealed abstract class ResolutionProcess {
 
   final def next[F[_]](
     fetch: Fetch.Metadata[F],
-    fastForward: Boolean = true
+    fastForward: Boolean
   )(implicit
     F: Monad[F]
   ): F[ResolutionProcess] =
