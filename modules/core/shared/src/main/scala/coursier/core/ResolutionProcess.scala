@@ -22,8 +22,8 @@ sealed abstract class ResolutionProcess {
         case Done(res) =>
           F.point(res)
         case missing0 @ Missing(missing, _, _) =>
-          F.bind(ResolutionProcess.fetchAll(missing, fetch))(result =>
-            missing0.next(result).run(fetch, maxIterations0)
+          F.bind(ResolutionProcess.fetchAll[F](missing, fetch)(F))(result =>
+            missing0.next(result).run[F](fetch, maxIterations0)(F)
           )
         case cont @ Continue(_, _) =>
           cont
